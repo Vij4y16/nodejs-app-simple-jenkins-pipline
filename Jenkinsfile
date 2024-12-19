@@ -1,45 +1,50 @@
 pipeline {
     agent any
-    // environment {
-    //     // Define environment variables
-    //     // STAGING_SERVER = 'user@staging-server-ip'  // Uncomment and set your staging server's address
-    //     APP_DIR = '/var/tmp/app'
-    // }
+    environment {
+        // Define environment variables
+        APP_DIR = '/var/tmp/app'  // The directory where your app should be located
+    }
     tools {
         // Ensure Node.js and NPM are installed
         nodejs "NodeJS"
     }
     stages {
-    //     stage('Checkout') {
-    //         steps {
-    //             script {
-    //                 // Pull the latest code from the repository
-    //                 git 'https://github.com/Vij4y16/nodejs-app.git'
-    //             }
-    //         }
-    //     }
+        stage('Checkout') {
+            steps {
+                script {
+                    // Clone the repository if the directory does not exist
+                    sh """
+                    if [ ! -d "${APP_DIR}" ]; then
+                        git clone https://github.com/Vij4y16/nodejs-app.git ${APP_DIR};
+                    else
+                        cd ${APP_DIR} && git pull origin main;
+                    fi
+                    """
+                }
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install npm dependencies
-                    sh 'npm install'
+                    // Install npm dependencies in the cloned directory
+                    sh 'cd ${APP_DIR} && npm install'
                 }
             }
         }
         stage('Run Tests') {
             steps {
                 script {
-                    // Run unit tests using Jest
-                    sh 'npm test'
+                    // Run unit tests using Jest in the cloned directory
+                    sh 'cd ${APP_DIR} && npm test'
                 }
             }
         }
         stage('Deploy to Staging') {
             steps {
                 script {
-                    // Deploy to the staging server
+                    // Deploy the app using PM2
                     sh """
-                    'npm install && pm2 restart app || pm2 start app.js'
+                    cd ${APP_DIR} && npm install && pm2 restart app || pm2 start app.js --name "app"
                     """
                 }
             }
