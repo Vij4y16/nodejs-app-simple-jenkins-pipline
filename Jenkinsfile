@@ -9,15 +9,15 @@ pipeline {
         // Ensure Node.js and NPM are installed
         nodejs "NodeJS"
     }
-    stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    // Pull the latest code from the repository
-                    git 'https://github.com/Vij4y16/nodejs-app.git'
-                }
-            }
-        }
+    // stages {
+    //     stage('Checkout') {
+    //         steps {
+    //             script {
+    //                 // Pull the latest code from the repository
+    //                 git 'https://github.com/Vij4y16/nodejs-app.git'
+    //             }
+    //         }
+    //     }
         stage('Install Dependencies') {
             steps {
                 script {
