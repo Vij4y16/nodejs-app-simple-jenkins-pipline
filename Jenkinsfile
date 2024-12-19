@@ -9,7 +9,7 @@ pipeline {
         // Ensure Node.js and NPM are installed
         nodejs "NodeJS"
     }
-    // stages {
+    stages {
     //     stage('Checkout') {
     //         steps {
     //             script {
