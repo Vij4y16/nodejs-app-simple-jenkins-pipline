@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         // Define environment variables
-        APP_DIR = '/var/tmp/app'  // The directory where your app should be located
+        APP_DIR = '/var/tmp/app/nodejs-app'  // The directory where your app should be located
     }
     tools {
         // Ensure Node.js and NPM are installed
