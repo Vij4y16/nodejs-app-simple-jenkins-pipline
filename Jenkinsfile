@@ -2,20 +2,19 @@ pipeline {
     agent any
     environment {
         // Define environment variables
-        STAGING_SERVER = 'user@staging-server-ip'
-        APP_DIR = '/path/to/your/app'
-        NODEJS_VERSION = '14.x'
+        //STAGING_SERVER = 'user@staging-server-ip'
+        APP_DIR = '/var/tmp/app'
     }
     tools {
         // Install Node.js and NPM versions
-        nodejs "Node-${NODEJS_VERSION}"
+        nodejs "NodeJS"
     }
     stages {
         stage('Checkout') {
             steps {
                 script {
                     // Pull the latest code from the repository
-                    git 'https://github.com/your-repository.git'
+                    git 'https://github.com/Vij4y16/nodejs-app.git'
                 }
             }
         }
@@ -35,14 +34,6 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
-            steps {
-                script {
-                    // Optional: Build production-ready assets (e.g., bundling, minification)
-                    sh 'npm run build'
-                }
-            }
-        }
         stage('Deploy to Staging') {
             steps {
                 script {
@@ -53,17 +44,17 @@ pipeline {
                 }
             }
         }
-        stage('Notify') {
-            steps {
-                script {
-                    // Send notifications after the job run
-                    mail to: 'you@example.com',
-                         subject: "Build #${BUILD_NUMBER} - ${currentBuild.result}",
-                         body: "The build ${currentBuild.result} for commit ${GIT_COMMIT} has completed. Please check the logs for details."
-                }
-            }
-        }
-    }
+    //     stage('Notify') {
+    //         steps {
+    //             script {
+    //                 // Send notifications after the job run
+    //                 mail to: 'you@example.com',
+    //                      subject: "Build #${BUILD_NUMBER} - ${currentBuild.result}",
+    //                      body: "The build ${currentBuild.result} for commit ${GIT_COMMIT} has completed. Please check the logs for details."
+    //             }
+    //         }
+    //     }
+    // }
     post {
         success {
             echo "Build and Deployment successful!"
