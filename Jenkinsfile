@@ -14,11 +14,7 @@ pipeline {
                 script {
                     // Clone the repository if the directory does not exist
                     sh """
-                    if [ ! -d "${APP_DIR}" ]; then
                         git clone https://github.com/Vij4y16/nodejs-app.git ${APP_DIR};
-                    else
-                        cd ${APP_DIR} && git pull origin main;
-                    fi
                     """
                 }
             }
