@@ -3,7 +3,7 @@ pipeline {
     environment {
         // Define environment variables
         // STAGING_SERVER = 'user@staging-server-ip'  // Uncomment and set your staging server's address
-        // APP_DIR = '/var/tmp/app'
+        APP_DIR = '/var/tmp/app'
     }
     tools {
         // Ensure Node.js and NPM are installed
