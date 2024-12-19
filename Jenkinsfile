@@ -2,11 +2,11 @@ pipeline {
     agent any
     environment {
         // Define environment variables
-        //STAGING_SERVER = 'user@staging-server-ip'
+        STAGING_SERVER = 'user@staging-server-ip'  // Uncomment and set your staging server's address
         APP_DIR = '/var/tmp/app'
     }
     tools {
-        // Install Node.js and NPM versions
+        // Ensure Node.js and NPM are installed
         nodejs "NodeJS"
     }
     stages {
@@ -39,22 +39,12 @@ pipeline {
                 script {
                     // Deploy to the staging server
                     sh """
-                    ssh -o StrictHostKeyChecking=no ${STAGING_SERVER} 'cd ${APP_DIR} && git pull origin main && npm install && pm2 restart app'
+                    ssh -o StrictHostKeyChecking=no ${STAGING_SERVER} 'cd ${APP_DIR} && git pull origin main && npm install && pm2 restart app || pm2 start app.js --name "app"'
                     """
                 }
             }
         }
-    //     stage('Notify') {
-    //         steps {
-    //             script {
-    //                 // Send notifications after the job run
-    //                 mail to: 'you@example.com',
-    //                      subject: "Build #${BUILD_NUMBER} - ${currentBuild.result}",
-    //                      body: "The build ${currentBuild.result} for commit ${GIT_COMMIT} has completed. Please check the logs for details."
-    //             }
-    //         }
-    //     }
-    // }
+    }
     post {
         success {
             echo "Build and Deployment successful!"
