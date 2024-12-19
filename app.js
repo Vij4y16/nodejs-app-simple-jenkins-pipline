@@ -8,9 +8,9 @@ app.get('/', (req, res) => {
 
 // Only start the server if this file is not imported in tests
 if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-  });
+app.listen(3000, '0.0.0.0', () => {
+    console.log('Example app listening at http://localhost:3000');
+});
 }
 
 module.exports = app;  // Export app for testing
