@@ -39,7 +39,7 @@ pipeline {
                 script {
                     // Deploy to the staging server
                     sh """
-                    ssh -o StrictHostKeyChecking=no ${STAGING_SERVER} 'cd ${APP_DIR} && git pull origin main && npm install && pm2 restart app || pm2 start app.js --name "app"'
+                    'cd ${APP_DIR} && git pull origin main && npm install && pm2 restart app || pm2 start app.js --name "app"'
                     """
                 }
             }
