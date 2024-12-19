@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         // Define environment variables
-        STAGING_SERVER = 'user@staging-server-ip'  // Uncomment and set your staging server's address
-        APP_DIR = '/var/tmp/app'
+        // STAGING_SERVER = 'user@staging-server-ip'  // Uncomment and set your staging server's address
+        // APP_DIR = '/var/tmp/app'
     }
     tools {
         // Ensure Node.js and NPM are installed
@@ -39,7 +39,7 @@ pipeline {
                 script {
                     // Deploy to the staging server
                     sh """
-                    'cd ${APP_DIR} && git pull origin main && npm install && pm2 restart app || pm2 start app.js --name "app"'
+                    'npm install && pm2 restart app || pm2 start app.js --name "app"'
                     """
                 }
             }
