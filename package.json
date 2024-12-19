@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest",
+    "build": "echo 'Building the app (no build steps for now)'"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}
