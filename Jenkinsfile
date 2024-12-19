@@ -39,7 +39,7 @@ pipeline {
                 script {
                     // Deploy to the staging server
                     sh """
-                    'npm install && pm2 restart app || pm2 start app.js --name "app"'
+                    'npm install && pm2 restart app || pm2 start app.js'
                     """
                 }
             }
