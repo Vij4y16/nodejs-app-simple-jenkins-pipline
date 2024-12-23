@@ -40,7 +40,7 @@ pipeline {
                 script {
                     // Deploy the app using PM2
                     sh """
-                    cd ${APP_DIR} && npm install && pm2 restart app || pm2 start app.js --name "app"
+                    cd ${APP_DIR} && npm install && pm2 restart app || pm2 start app.js
                     """
                 }
             }
